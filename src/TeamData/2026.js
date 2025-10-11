@@ -24,6 +24,17 @@ export const batch2026 = [
   }
 },
 {
+  id: 24,
+  name: "Nirdesh Regmi",
+  role: "General Secretary",
+  image: nirdesh,
+  social: {
+    linkedin: "#",
+    email: "pending@university.edu",
+    insta: "#"
+  }
+},
+{
   id: 22,
   name: "Sherma Saren",
   role: "Vice President",
@@ -45,17 +56,7 @@ export const batch2026 = [
     insta: "#"
   }
 },
-{
-  id: 24,
-  name: "Nirdesh Regmi",
-  role: "General Secretary",
-  image: nirdesh,
-  social: {
-    linkedin: "#",
-    email: "pending@university.edu",
-    insta: "#"
-  }
-},
+
 {
   id: 25,
   name: "Shakir Shoaib",

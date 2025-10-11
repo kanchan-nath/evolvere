@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
-import './Gallery.css';
+import { useState, useEffect } from "react";
+import "./Gallery.css";
 
-import gallery1 from '../../images/gallery1.jpg';
-import gallery2 from '../../images/gallery2.jpg';
-import gallery3 from '../../images/gallery3.jpg';
-import gallery4 from '../../images/gallery4.jpg';
-
+import gallery1 from "../../images/gallery1.jpg";
+import gallery2 from "../../images/gallery2.jpg";
+import gallery3 from "../../images/gallery3.jpg";
+import gallery4 from "../../images/gallery4.jpg";
 
 const Gallery = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,7 +27,7 @@ const Gallery = () => {
     {
       src: gallery4,
       alt: "Graduation",
-    }
+    },
   ];
 
   const totalSlides = images.length;
@@ -51,7 +50,7 @@ const Gallery = () => {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000); // Change slide every 3 seconds
+    }, 2000); // Change slide every 3 seconds
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, totalSlides]);
@@ -59,25 +58,25 @@ const Gallery = () => {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft') {
+      if (e.key === "ArrowLeft") {
         changeSlide(-1);
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === "ArrowRight") {
         changeSlide(1);
-      } else if (e.key === ' ') {
+      } else if (e.key === " ") {
         e.preventDefault();
-        setIsAutoPlaying(prev => !prev);
+        setIsAutoPlaying((prev) => !prev);
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
-    <section className="dynamic-gallery" id='gallery'>
+    <section className="dynamic-gallery" id="gallery">
       <div className="gallery-container-wrapper">
         <div className="gallery-title">
-          <h2 className='heading'>Photo Gallery</h2>
+          <h2 className="heading">Photo Gallery</h2>
           <div className="title-underline"></div>
         </div>
 
@@ -109,7 +108,7 @@ const Gallery = () => {
             className="gallery-slider"
             style={{
               width: `${totalSlides * 100}%`,
-              transform: `translateX(-${(currentSlide * 100) / totalSlides}%)`
+              transform: `translateX(-${(currentSlide * 100) / totalSlides}%)`,
             }}
           >
             {images.map((image, index) => (
@@ -120,11 +119,7 @@ const Gallery = () => {
                 onMouseEnter={() => setHoveredSlide(index)}
                 onMouseLeave={() => setHoveredSlide(null)}
               >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="slide-image"
-                />
+                <img src={image.src} alt={image.alt} className="slide-image" />
               </div>
             ))}
           </div>
@@ -135,13 +130,14 @@ const Gallery = () => {
           {images.map((_, index) => (
             <button
               key={index}
-              className={`indicator ${index === currentSlide ? 'indicator-active' : ''}`}
+              className={`indicator ${
+                index === currentSlide ? "indicator-active" : ""
+              }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
-
       </div>
     </section>
   );

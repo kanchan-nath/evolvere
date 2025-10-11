@@ -1,4 +1,4 @@
-import ashish from '../images/ashish.jpg';
+// import ashish from '../images/ashish.jpg';
 import debjyoti from '../images/deb.jpg';
 import piyush from '../images/piyus.png';
 import ayushi from '../images/ayushi.jpg';
@@ -11,7 +11,7 @@ import sham from '../images/sham.png';
 import arnab from '../images/arnab.png';
 import piuss from '../images/piuss.png';
 import mothi from '../images/mothi.jpg';
-import akilesh from '../images/akilesh.png';
+// import akilesh from '../images/akilesh.png';
 import sangam from '../images/sangam.png';
 import mahesh from '../images/mahesh.jpg';
 
@@ -173,26 +173,27 @@ export const batch2027 = [
       insta: ""
     }
   },
-  {
-    id: 15,
-    name: "Ashish Sagar",
-    role: "Video Editing",
-    image: ashish,
-    social: {
-      linkedin: "https://www.linkedin.com/in/ashish-sagar-731ba1327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      email: "ashishsagar7962@gmail.com",
-      insta: ""
-    }
-  },
-  {
-    id: 16,
-    name: "Akhilesh",
-    role: "Graphic Designer",
-    image: akilesh,
-    social: {
-      linkedin: "https://www.linkedin.com/in/rishabh000",
-      email: "rishabhsharma8734@gmail.com",
-      insta: ""
-    }
-  }
+  // {
+  //   id: 15,
+  //   name: "Ashish Sagar",
+  //   role: "Video Editing",
+  //   image: ashish,
+  //   social: {
+  //     linkedin: "https://www.linkedin.com/in/ashish-sagar-731ba1327?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+  //     email: "ashishsagar7962@gmail.com",
+  //     insta: ""
+  //   }
+  // },
+  // {
+  //   id: 16,
+  //   name: "Akhilesh",
+  //   role: "Graphic Designer",
+  //   image: akilesh,
+  //   social: {
+  //     linkedin: "https://www.linkedin.com/in/rishabh000",
+  //     email: "rishabhsharma8734@gmail.com",
+  //     insta: ""
+  //   }
+  // }
+
 ];

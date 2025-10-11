@@ -8,6 +8,7 @@ import aniruddha from '../images/aniruddha.jpg';
 import alok from '../images/alok.jpg';
 import nikhil from '../images/nikhil.jpg';
 import subhajeet from '../images/subhajeet.jpg';
+import sudarh from '../images/sudarh.jpg';
 
 
 
@@ -51,11 +52,22 @@ export const Alumini = [
       insta: ""
     }
   },
+  // {
+  //   id: 104,
+  //   name: "Shushmit Kumar",
+  //   role: "Creative & Tech Head",
+  //   image: susmit,
+  //   social: {
+  //     linkedin: "",
+  //     email: "",
+  //     insta: ""
+  //   }
+  // },
   {
     id: 104,
     name: "Sudarshan Kumar",
     role: "Creative & Tech Head",
-    image: susmit,
+    image: sudarh,
     social: {
       linkedin: "",
       email: "",

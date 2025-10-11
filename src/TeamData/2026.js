@@ -8,7 +8,7 @@ import senior4 from "../images/senior4.jpg"
 import senior3 from "../images/senior3.jpg";
 import senior2 from "../images/senior2.jpg";
 import sathi from "../images/sathi.jpg"
-import dummy from "../images/dummy.png"
+import sreeja from "../images/sreeja.jpg"
 
 export const batch2026 = [
   
@@ -93,7 +93,7 @@ export const batch2026 = [
   id: 28,
   name: "Sreeja Kar",
   role: "Content Head",
-  image: dummy,
+  image: sreeja,
   social: {
     linkedin: "#",
     email: "pending@university.edu",

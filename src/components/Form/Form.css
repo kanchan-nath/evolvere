@@ -2,12 +2,44 @@
 .contact {
     padding-top: 150px;
     background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background decoration */
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 109, 119, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatVertical 10s ease-in-out infinite;
+    z-index: 1;
+}
+
+.contact::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    left: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: floatVertical 8s ease-in-out infinite reverse;
+    z-index: 1;
 }
 
 .contact-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 3rem;
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .contact-info {
@@ -20,6 +52,36 @@
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: slideInLeft 0.6s ease-out both;
+    animation-delay: calc(var(--card-index, 0) * 0.15s);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 109, 119, 0.05) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 12px;
+}
+
+.contact-card:hover::before {
+    opacity: 1;
+}
+
+.contact-card:hover {
+    transform: translateX(10px);
+    background-color: rgba(0, 109, 119, 0.02);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
 .contact-icon {
@@ -33,11 +95,51 @@
     font-size: 1.5rem;
     color: var(--teal);
     flex-shrink: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    z-index: 2;
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.contact-card:hover .contact-icon {
+    background-color: var(--teal);
+    color: white;
+    transform: scale(1.1) rotate(360deg);
+    box-shadow: 0 10px 20px rgba(0, 109, 119, 0.3);
+    animation: none;
+}
+
+.contact-details {
+    position: relative;
+    z-index: 2;
+    flex: 1;
 }
 
 .contact-details h3 {
     margin-bottom: 0.5rem;
     font-size: 1.3rem;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.contact-details h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--coral);
+    transition: width 0.4s ease;
+}
+
+.contact-card:hover .contact-details h3::after {
+    width: 100%;
+}
+
+.contact-card:hover .contact-details h3 {
+    color: var(--teal);
 }
 
 .contact-details p,
@@ -45,10 +147,31 @@
     color: #666;
     text-decoration: none;
     transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.contact-details a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--coral);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
 }
 
 .contact-details a:hover {
     color: var(--coral);
+    transform: translateX(5px);
+}
+
+.contact-details a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .contact-form {
@@ -56,16 +179,48 @@
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    animation: slideInRight 0.8s ease-out 0.2s both;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 109, 119, 0.05) 50%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.contact-form:hover {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
 }
 
 .form-group {
     margin-bottom: 1.5rem;
+    position: relative;
+    animation: fadeIn 0.5s ease-out both;
+    animation-delay: calc(var(--form-index, 0) * 0.1s);
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    transition: all 0.3s ease;
+    transform-origin: left;
+}
+
+.form-group:focus-within label {
+    color: var(--teal);
+    transform: scale(1.05);
+    font-weight: 600;
 }
 
 .form-group input,
@@ -75,7 +230,14 @@
     border: 1px solid #ddd;
     border-radius: 8px;
     font-family: 'Poppins', sans-serif;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: white;
+    position: relative;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+    border-color: #999;
 }
 
 .form-group input:focus,
@@ -83,9 +245,228 @@
     outline: none;
     border-color: var(--teal);
     box-shadow: 0 0 0 3px rgba(0, 109, 119, 0.1);
+    transform: translateY(-2px);
+    background-color: #fff;
+}
+
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+    opacity: 0.5;
+    transform: translateX(5px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    transition: all 0.3s ease;
 }
 
 .form-group textarea {
     min-height: 150px;
     resize: vertical;
+}
+
+/* === Keyframe Animations === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+@keyframes floatVertical {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-20px);
+    }
+
+    50% {
+        transform: translateY(-40px);
+    }
+
+    75% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .contact {
+        padding-top: 100px;
+    }
+
+    .contact-container {
+        gap: 2rem;
+    }
+
+    .contact-card {
+        animation: fadeInUp 0.6s ease-out both;
+        animation-delay: calc(var(--card-index, 0) * 0.1s);
+    }
+
+    .contact-card:hover {
+        transform: translateX(5px);
+    }
+
+    .contact-form {
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+        padding: 1.5rem;
+    }
+
+    .contact-form:hover {
+        transform: translateY(-3px);
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .contact-details h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .contact-card:hover .contact-details h3::after {
+        width: 100%;
+    }
+
+    .contact-details a:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+
+    .contact,
+    .contact::before,
+    .contact::after,
+    .contact-container,
+    .contact-card,
+    .contact-card::before,
+    .contact-icon,
+    .contact-details h3,
+    .contact-details h3::after,
+    .contact-details a,
+    .contact-details a::before,
+    .contact-form,
+    .contact-form::before,
+    .form-group,
+    .form-group label,
+    .form-group input,
+    .form-group textarea {
+        animation: none;
+        transition: none;
+    }
+
+    .contact-card:hover {
+        transform: none;
+    }
+
+    .contact-card:hover .contact-icon {
+        transform: none;
+    }
+
+    .contact-form:hover {
+        transform: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        transform: none;
+    }
+}
+
+/* === Touch Devices === */
+@media (hover: none) and (pointer: coarse) {
+    .contact-card:hover {
+        transform: none;
+    }
+
+    .contact-card:hover .contact-icon {
+        transform: none;
+    }
+
+    .contact-form:hover {
+        transform: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        transform: none;
+    }
 }

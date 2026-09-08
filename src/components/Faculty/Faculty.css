@@ -2,6 +2,35 @@
 .faculty {
     padding-bottom: 150px;
     background: linear-gradient(135deg, rgba(237, 246, 249, 0.9) 0%, rgba(131, 197, 190, 0.2) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background decoration */
+.faculty::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    right: -100px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 109, 119, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.faculty::after {
+    content: '';
+    position: absolute;
+    bottom: 10%;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0, 109, 119, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
 }
 
 .faculty-grid {
@@ -12,43 +41,94 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
 }
-.heading-fa{
+
+.heading-fa {
     font-size: 16px;
     font-weight: 600;
+    animation: fadeInDown 0.8s ease-out;
 }
+
 .faculty-card {
     background-color: white;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     display: flex;
     flex-direction: column;
     width: 300px;
     height: 530px;
     border: 2px solid #006D77;
+    position: relative;
+    animation: fadeInScale 0.6s ease-out both;
+    animation-delay: calc(var(--card-index, 0) * 0.1s);
+}
+
+.faculty-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 109, 119, 0.05) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.faculty-card:hover::before {
+    opacity: 1;
 }
 
 .faculty-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 109, 119, 0.2);
+    border-color: #ff6b6b;
+    animation-play-state: paused;
+}
+
+.faculty-card:active {
+    transform: translateY(-5px) scale(0.98);
 }
 
 .faculty-image {
     height: 300px;
     overflow: hidden;
+    position: relative;
+}
+
+.faculty-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.faculty-card:hover .faculty-image::after {
+    opacity: 1;
 }
 
 .faculty-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    filter: saturate(0.9);
 }
 
 .faculty-card:hover .faculty-image img {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(2deg);
+    filter: saturate(1.1);
 }
 
 .faculty-content {
@@ -56,10 +136,40 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.faculty-card:hover .faculty-content {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
 }
 
 .faculty-content h3 {
     margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.faculty-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ff6b6b;
+    transition: width 0.4s ease;
+}
+
+.faculty-card:hover .faculty-content h3 {
+    color: #006D77;
+    transform: translateX(5px);
+}
+
+.faculty-card:hover .faculty-content h3::after {
+    width: 100%;
 }
 
 .faculty-department {
@@ -67,6 +177,13 @@
     font-weight: 500;
     margin-bottom: 1rem;
     display: block;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.faculty-card:hover .faculty-department {
+    color: #ff6b6b;
+    transform: translateX(5px);
 }
 
 .faculty-expertise {
@@ -88,4 +205,198 @@
     border-radius: 50px;
     font-size: 0.8rem;
     font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-out both;
+    animation-delay: calc(var(--tag-index, 0) * 0.1s);
+}
+
+.expertise-tag::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 109, 119, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.expertise-tag:hover::before {
+    width: 200px;
+    height: 200px;
+}
+
+.expertise-tag:hover {
+    background-color: #006D77;
+    color: white;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 109, 119, 0.3);
+}
+
+/* === Keyframe Animations === */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(20px, -20px);
+    }
+
+    50% {
+        transform: translate(-10px, -30px);
+    }
+
+    75% {
+        transform: translate(-20px, -10px);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .faculty-card {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .faculty-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+
+    .faculty-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faculty-card {
+        width: 100%;
+        height: auto;
+        min-height: 350px;
+    }
+
+    .faculty-image {
+        height: 200px;
+    }
+
+    .faculty-content {
+        padding: 1rem;
+    }
+
+    .faculty-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+
+    .faculty,
+    .faculty::before,
+    .faculty::after,
+    .faculty-card,
+    .faculty-card::before,
+    .faculty-image img,
+    .faculty-image::after,
+    .faculty-content,
+    .faculty-content h3,
+    .faculty-content h3::after,
+    .faculty-department,
+    .expertise-tag,
+    .expertise-tag::before,
+    .heading-fa {
+        animation: none;
+        transition: none;
+    }
+
+    .faculty-card:hover {
+        transform: none;
+    }
+
+    .faculty-card:hover .faculty-image img {
+        transform: none;
+    }
+}
+
+/* === Touch Devices === */
+@media (hover: none) and (pointer: coarse) {
+    .faculty-card:hover {
+        transform: none;
+        animation: none;
+    }
+
+    .faculty-card:hover .faculty-image img {
+        transform: none;
+    }
+
+    .expertise-tag:hover {
+        transform: none;
+    }
 }

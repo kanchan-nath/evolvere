@@ -6,6 +6,9 @@
     --off-white: #EDF6F9;
     --charcoal: #1A1A1A;
     --light-gray: #F8F9FA;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 * {
@@ -14,30 +17,50 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    /* Accounts for fixed navigation */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--charcoal);
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    animation: bodyFadeIn 0.5s ease-out;
+    background-color: white;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    animation: containerFadeIn 0.8s ease-out;
 }
 
 section {
     padding: 80px 0;
+    position: relative;
+    animation: sectionFadeIn 0.6s ease-out;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 600;
     margin-bottom: 1rem;
+    line-height: 1.3;
+    transition: color 0.3s ease;
 }
 
 h1 {
     font-size: 3rem;
+    animation: headingSlideIn 0.8s var(--transition-smooth) both;
 }
 
 h2 {
@@ -45,6 +68,7 @@ h2 {
     text-align: center;
     margin-bottom: 3rem;
     position: relative;
+    animation: headingSlideIn 0.8s var(--transition-smooth) 0.1s both;
 }
 
 h2::after {
@@ -57,15 +81,26 @@ h2::after {
     height: 4px;
     background-color: var(--coral);
     border-radius: 2px;
+    transition: width 0.4s var(--transition-bounce);
+}
+
+h2:hover::after {
+    width: 100px;
 }
 
 h3 {
     font-size: 1.8rem;
+    animation: headingSlideIn 0.7s var(--transition-smooth) 0.2s both;
 }
 
 p {
     margin-bottom: 1rem;
     color: #666;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+p:hover {
+    color: #444;
 }
 
 .btn {
@@ -76,18 +111,46 @@ p {
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.4s var(--transition-bounce);
     border: 2px solid var(--teal);
     cursor: pointer;
     font-family: inherit;
     font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 400px;
+    height: 400px;
 }
 
 .btn:hover {
     background-color: var(--coral);
     border-color: var(--coral);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 109, 119, 0.2);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 109, 119, 0.25);
+    animation: btnPulse 1s ease-in-out;
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: 0 5px 15px rgba(0, 109, 119, 0.2);
 }
 
 .btn-outline {
@@ -95,9 +158,14 @@ p {
     color: var(--teal);
 }
 
+.btn-outline::before {
+    background: rgba(226, 149, 120, 0.2);
+}
+
 .btn-outline:hover {
     background-color: var(--coral);
     color: white;
+    border-color: var(--coral);
 }
 
 .text-center {
@@ -106,6 +174,8 @@ p {
 
 .section-title {
     margin-bottom: 4rem;
+    position: relative;
+    animation: sectionTitleIn 0.8s var(--transition-smooth) both;
 }
 
 /* Demo content to show footer at bottom */
@@ -113,12 +183,19 @@ p {
     padding: 40px 20px;
     text-align: center;
     color: #666;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .demo-content h1 {
     color: #333;
     margin-bottom: 20px;
     font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.demo-content h1:hover {
+    color: var(--teal);
+    transform: scale(1.02);
 }
 
 .demo-content p {
@@ -126,6 +203,112 @@ p {
     line-height: 1.6;
     max-width: 600px;
     margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* === Keyframe Animations === */
+@keyframes bodyFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes containerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes headingSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sectionTitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes btnPulse {
+
+    0%,
+    100% {
+        transform: translateY(-3px) scale(1.05);
+    }
+
+    50% {
+        transform: translateY(-5px) scale(1.08);
+    }
+}
+
+@keyframes textGlow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 0 rgba(0, 109, 119, 0);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(0, 109, 119, 0.3);
+    }
+}
+
+/* === Scroll Animations (for elements with .animate-on-scroll class) === */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+}
+
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* === Responsive Styles === */
@@ -143,6 +326,15 @@ p {
     section {
         padding: 70px 0;
     }
+
+    .btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        animation: none;
+    }
+
+    h2:hover::after {
+        width: 80px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -152,5 +344,62 @@ p {
 
     h2 {
         font-size: 1.8rem;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    body,
+    .container,
+    section,
+    h1,
+    h2,
+    h3,
+    .btn,
+    .btn::before,
+    .section-title,
+    .demo-content,
+    .demo-content p,
+    .animate-on-scroll {
+        animation: none;
+        transition: none;
+    }
+
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* === Touch Devices === */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: translateY(-2px);
+        animation: none;
+    }
+
+    .btn:active {
+        transform: scale(0.95);
+    }
+
+    h2:hover::after {
+        width: 60px;
     }
 }

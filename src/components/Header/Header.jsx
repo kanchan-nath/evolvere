@@ -3,6 +3,7 @@ import "./Header.css";
 import logoEvolvere from "../../images/logoevolvere1.png";
 import depart from "../../images/depart.png";
 import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
         </div>
 
         <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
-          <i className={isOpen ? "fas fa-times" : "fas fa-bars"}></i>
+          {isOpen ? <FaTimes /> : <FaBars />}
         </button>
 
         <div className={`nav-links ${isOpen ? "active" : ""}`}>
@@ -73,7 +74,13 @@ const Header = () => {
           </div>
         </div>
 
-        <img src={depart} alt="hi" className="department" />
+        <img
+          src={depart}
+          alt="Biotech department building"
+          className="department"
+          fetchpriority="high"
+          decoding="async"
+        />
       </section>
     </>
   );

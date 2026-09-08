@@ -9,33 +9,9 @@ const Faculty = () => {
         <div className="container">
           <h2>Our Faculty Advisors</h2>
           <div className="faculty-grid">
-            {/* <div className="faculty-card">
-              <div className="faculty-image">
-                <img
-                  src="https://nitdgp.ac.in/uploads/630bd9620220a19ec23c1ce61af1dc14.jpeg"
-                  alt="Faculty Advisor"
-                />
-              </div>
-              <div className="faculty-content">
-                <h3 className="heading-fa">Dr. Amita Barik</h3>
-                <span className="faculty-department">
-                  Department of BioTechnology
-                </span>
-                <div className="faculty-expertise">
-                  <p>Joined the Institute in 2019</p>
-                </div>
-                <a
-                  href="https://nitdgp.ac.in/department/biotechnology/faculty-2/amita-barik"
-                  className="btn btn-outline"
-                  target="blank"
-                >
-                  View Profile
-                </a>
-              </div>
-            </div> */}
             <div className="faculty-card">
               <div className="faculty-image">
-                <img src={ssm1} alt="Faculty Advisor" />
+                <img src={ssm1} alt="Faculty Advisor" loading="lazy" decoding="async" />
               </div>
               <div className="faculty-content">
                 <h3 className="heading-fa">Dr. Sudit Sekhar Mukhopadhyay</h3>
@@ -57,7 +33,7 @@ const Faculty = () => {
 
             <div className="faculty-card">
               <div className="faculty-image">
-                <img src={nm} alt="Faculty Advisor" />
+                <img src={nm} alt="Faculty Advisor" loading="lazy" decoding="async" />
               </div>
               <div className="faculty-content">
                 <h3 className="heading-fa">Dr. Nibedita Mahata</h3>

@@ -1,3 +1,5 @@
+// src/TeamData/Alumini.js
+
 import saranya from '../images/saranya.jpg';
 import abhishek from '../images/abhishek.jpg';
 import hiya from '../images/hiya.jpg';
@@ -8,22 +10,17 @@ import aniruddha from '../images/aniruddha.jpg';
 import alok from '../images/alok.jpg';
 import nikhil from '../images/nikhil.jpg';
 import subhajeet from '../images/subhajeet.jpg';
-import sudarh from '../images/sudarh.jpg';
 
-
-
-// import sudarshan from '../images/team/sudarshan.jpg';
-// import sanjukta from '../images/team/sanjukta.jpg';
-// import bishal from '../images/team/bishal.jpg';
-
-
+// =========================
+// Batch 2025 Alumni
+// =========================
 
 export const Alumini = [
   {
     id: 101,
     name: "Hiya Aidasani",
     role: "President",
-    image:hiya,
+    image: hiya,
     social: {
       linkedin: "",
       email: "",
@@ -52,6 +49,7 @@ export const Alumini = [
       insta: ""
     }
   },
+
   // {
   //   id: 104,
   //   name: "Shushmit Kumar",
@@ -63,11 +61,12 @@ export const Alumini = [
   //     insta: ""
   //   }
   // },
+
   {
     id: 104,
     name: "Sudarshan Kumar",
     role: "Creative & Tech Head",
-    image: sudarh,
+    image: debarpan,
     social: {
       linkedin: "",
       email: "",
@@ -107,6 +106,7 @@ export const Alumini = [
       insta: ""
     }
   },
+
   // {
   //   id: 108,
   //   name: "Sanjukta Maity",
@@ -118,6 +118,7 @@ export const Alumini = [
   //     insta: ""
   //   }
   // },
+
   {
     id: 109,
     name: "Aniruddha Dey",
@@ -140,6 +141,7 @@ export const Alumini = [
       insta: ""
     }
   },
+
   // {
   //   id: 111,
   //   name: "Sagnik Kuvali",
@@ -151,6 +153,7 @@ export const Alumini = [
   //     insta: ""
   //   }
   // },
+
   {
     id: 112,
     name: "Debarpan",

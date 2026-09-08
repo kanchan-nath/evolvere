@@ -9,7 +9,7 @@ const Faculty = () => {
         <div className="container">
           <h2>Our Faculty Advisors</h2>
           <div className="faculty-grid">
-            <div className="faculty-card">
+            {/* <div className="faculty-card">
               <div className="faculty-image">
                 <img
                   src="https://nitdgp.ac.in/uploads/630bd9620220a19ec23c1ce61af1dc14.jpeg"
@@ -32,7 +32,7 @@ const Faculty = () => {
                   View Profile
                 </a>
               </div>
-            </div>
+            </div> */}
             <div className="faculty-card">
               <div className="faculty-image">
                 <img src={ssm1} alt="Faculty Advisor" />

@@ -120,7 +120,8 @@
     font-size: 1.3rem;
     transition: all 0.3s ease;
     position: relative;
-    display: inline-block;
+    display:block;
+    width: fit-content;
 }
 
 .contact-details h3::after {

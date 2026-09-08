@@ -1,9 +1,13 @@
 /* === Dynamic Gallery Styles === */
-.heading{
+.heading {
   color: #fff !important;
+  animation: fadeInDown 1s ease-out;
 }
+
 .dynamic-gallery {
   background: linear-gradient(135deg, #2c7a7b 0%, #2d5a87 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
   color: white;
   position: relative;
   overflow: hidden;
@@ -15,14 +19,14 @@
 
 @media (max-width: 768px) {
   .dynamic-gallery {
-    min-height: auto;   /* Let it shrink */
-    height: auto;       /* Fit content */
-    padding: 60px 20px; /* Adjust padding for small screens */
-    display: block;     /* Avoid stretching with flex */
+    min-height: auto;
+    height: auto;
+    padding: 60px 20px;
+    display: block;
   }
 }
 
-
+/* === Animated Background Circles === */
 .dynamic-gallery::before {
   content: '';
   position: absolute;
@@ -33,6 +37,7 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   z-index: 1;
+  animation: float 6s ease-in-out infinite;
 }
 
 .dynamic-gallery::after {
@@ -45,6 +50,7 @@
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   z-index: 1;
+  animation: float 8s ease-in-out infinite reverse;
 }
 
 .gallery-container-wrapper {
@@ -54,6 +60,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
+  animation: fadeIn 1s ease-out;
 }
 
 /* === Gallery Title === */
@@ -61,6 +68,7 @@
   text-align: center;
   margin-bottom: 3rem;
   position: relative;
+  animation: slideInUp 0.8s ease-out;
 }
 
 .gallery-title h2 {
@@ -68,6 +76,8 @@
   margin: 0;
   font-weight: bold;
   color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .title-underline {
@@ -79,6 +89,7 @@
   height: 4px;
   background-color: #ff6b6b;
   border-radius: 2px;
+  animation: expandWidth 2s ease-in-out infinite;
 }
 
 /* === Gallery Viewport === */
@@ -92,12 +103,19 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 0.8s ease-out;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-viewport:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transform: translateY(-5px);
 }
 
 /* === Gallery Slider === */
 .gallery-slider {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   height: 500px;
 }
 
@@ -105,6 +123,7 @@
   position: relative;
   flex-shrink: 0;
   height: 100%;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .slide-image {
@@ -112,9 +131,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
 }
 
-
+.gallery-slide:hover .slide-image {
+  transform: scale(1.05);
+}
 
 /* === Navigation Arrows === */
 .gallery-nav {
@@ -130,17 +152,24 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 1.2rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .gallery-nav:hover {
   background-color: #ff6b6b;
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 10px 20px rgba(255, 107, 107, 0.4);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.gallery-nav:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .gallery-nav:focus {
@@ -162,6 +191,7 @@
   justify-content: center;
   gap: 12px;
   margin-top: 30px;
+  animation: fadeIn 1s ease-out 0.3s both;
 }
 
 .indicator {
@@ -170,23 +200,24 @@
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   border: 2px solid transparent;
+  position: relative;
 }
 
 .indicator:hover {
   background-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
 }
 
 .indicator-active {
   background-color: #ff6b6b;
   border-color: white;
-  transform: scale(1.2);
+  transform: scale(1.3);
+  animation: pulse 2s ease-in-out infinite;
 }
 
 /* === Controls === */
-
-
 .control-button {
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
@@ -196,16 +227,39 @@
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+}
+
+.control-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.control-button:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 .control-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .control-active {
   background-color: #ff6b6b;
   border-color: #ff6b6b;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .slide-counter {
@@ -217,6 +271,120 @@
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: bold;
+  animation: fadeIn 0.5s ease-out;
+  transition: all 0.3s ease;
+}
+
+.slide-counter:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+/* === Keyframe Animations === */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -30px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandWidth {
+
+  0%,
+  100% {
+    width: 80px;
+  }
+
+  50% {
+    width: 120px;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 /* === Responsive Design === */
@@ -224,37 +392,37 @@
   .dynamic-gallery {
     padding: 60px 0;
   }
-  
+
   .gallery-title h2 {
     font-size: 2rem;
   }
-  
+
   .gallery-slider {
     height: 400px;
   }
-  
+
   .gallery-nav {
     width: 40px;
     height: 40px;
     font-size: 1rem;
   }
-  
+
   .prev-nav {
     left: 10px;
   }
-  
+
   .next-nav {
     right: 10px;
   }
-  
+
   .slide-overlay {
     padding: 20px 15px 15px;
   }
-  
+
   .overlay-title {
     font-size: 1.2rem;
   }
-  
+
   .overlay-description {
     font-size: 0.9rem;
   }
@@ -269,47 +437,47 @@
   .gallery-container-wrapper {
     padding: 0 15px;
   }
-  
+
   .gallery-title h2 {
     font-size: 1.8rem;
   }
-  
+
   .gallery-slider {
     height: 300px;
   }
-  
+
   .gallery-nav {
     width: 35px;
     height: 35px;
     font-size: 0.9rem;
   }
-  
+
   .prev-nav {
     left: 5px;
   }
-  
+
   .next-nav {
     right: 5px;
   }
-  
+
   .slide-overlay {
     padding: 15px 10px 10px;
   }
-  
+
   .overlay-title {
     font-size: 1.1rem;
     margin-bottom: 5px;
   }
-  
+
   .overlay-description {
     font-size: 0.85rem;
   }
-  
+
   .gallery-indicators {
     gap: 8px;
     margin-top: 20px;
   }
-  
+
   .indicator {
     width: 10px;
     height: 10px;
@@ -326,6 +494,7 @@
 .gallery-nav:focus-visible {
   outline: 2px solid #ff6b6b;
   outline-offset: 2px;
+  animation: pulse 1s ease-in-out infinite;
 }
 
 .indicator:focus-visible {
@@ -343,11 +512,19 @@
   .gallery-slider {
     transition: none;
   }
-  
+
   .indicator,
   .gallery-nav,
   .slide-overlay,
-  .control-button {
+  .control-button,
+  .dynamic-gallery,
+  .dynamic-gallery::before,
+  .dynamic-gallery::after,
+  .gallery-title h2,
+  .title-underline,
+  .gallery-viewport,
+  .slide-image {
+    animation: none;
     transition: none;
   }
 }
@@ -358,8 +535,13 @@
     transform: translateY(0);
     background: linear-gradient(transparent 60%, rgba(0, 0, 0, 0.8));
   }
-  
+
   .gallery-nav:hover {
     transform: translateY(-50%);
+    animation: none;
+  }
+
+  .control-button:hover {
+    transform: none;
   }
 }

@@ -119,7 +119,13 @@ const Gallery = () => {
                 onMouseEnter={() => setHoveredSlide(index)}
                 onMouseLeave={() => setHoveredSlide(null)}
               >
-                <img src={image.src} alt={image.alt} className="slide-image" />
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="slide-image"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
+                />
               </div>
             ))}
           </div>
@@ -130,9 +136,8 @@ const Gallery = () => {
           {images.map((_, index) => (
             <button
               key={index}
-              className={`indicator ${
-                index === currentSlide ? "indicator-active" : ""
-              }`}
+              className={`indicator ${index === currentSlide ? "indicator-active" : ""
+                }`}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}
             />

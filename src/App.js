@@ -1,19 +1,24 @@
 import { BrowserRouter } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 
 import Header from './components/Header'
 import About from './components/About'
-import EventList from './components/EventList'
-import Footer from './components/Footer'
-import Form from './components/Form'
-import Team from './components/Team'
-import Faculty from './components/Faculty'
-import Gallery from './components/Gallery'
-import Loader from './components/Loader/loader' 
+import Loader from './components/Loader/loader'
+
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 import './App.css'
 import './styles/global.css'
-import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// Below-the-fold sections are code-split — they no longer bloat
+// the initial bundle or block first paint.
+const EventList = lazy(() => import('./components/EventList'))
+const Gallery = lazy(() => import('./components/Gallery'))
+const Faculty = lazy(() => import('./components/Faculty'))
+const Team = lazy(() => import('./components/Team'))
+const Form = lazy(() => import('./components/Form'))
+const Footer = lazy(() => import('./components/Footer'))
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,20 +31,26 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   if (loading) {
-    return <Loader />;   
+    return <Loader />;
   }
 
   return (
     <BrowserRouter>
       <Header />
       <About />
-      <EventList />
-      <Gallery />
-      <Faculty />
-      <Team />
-      <Form />
-      <Footer />
+      <Suspense fallback={null}>
+        <EventList />
+        <Gallery />
+        <Faculty />
+        <Team />
+        <Form />
+        <Footer />
+      </Suspense>
     </BrowserRouter>
   );
 };

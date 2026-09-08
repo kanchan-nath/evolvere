@@ -10,19 +10,28 @@ nav {
     width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
+    animation: navSlideDown 0.6s ease-out;
 }
 
 nav.scrolled {
     padding: 0.5rem 5%;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
 }
+
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
 }
 
 .logo {
@@ -32,15 +41,30 @@ nav.scrolled {
     text-decoration: none;
     display: flex;
     align-items: center;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--coral);
 }
 
 .logo span {
     color: var(--coral);
+    transition: color 0.3s ease;
+}
+
+.logo:hover span {
+    color: var(--teal);
 }
 
 .logo i {
     margin-right: 10px;
     font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover i {
+    transform: rotate(360deg);
 }
 
 .nav-links {
@@ -54,7 +78,7 @@ nav.scrolled {
     font-weight: 500;
     position: relative;
     padding: 0.5rem 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .nav-links a::after {
@@ -65,11 +89,21 @@ nav.scrolled {
     bottom: 0;
     left: 0;
     background-color: var(--coral);
+    border-radius: 2px;
     transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--coral);
+    transform: translateY(-2px);
 }
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+.nav-links a:active {
+    transform: translateY(0);
 }
 
 .mobile-menu-btn {
@@ -79,14 +113,32 @@ nav.scrolled {
     font-size: 1.8rem;
     color: var(--teal);
     cursor: pointer;
-    z-index: 1100; /* stays above menu */
+    z-index: 1100;
+    transition: all 0.3s ease;
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.mobile-menu-btn:hover {
+    color: var(--coral);
+    transform: scale(1.1);
+}
+
+.mobile-menu-btn:active {
+    transform: scale(0.9);
 }
 
 .logoevolvere {
-    height: 50px;       /* Default height for desktops */
-    width: auto;        /* Keep aspect ratio */
-    max-width: 100%;    /* Prevent overflow */
-    display: block;     /* Removes bottom spacing issues */
+    height: 50px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.logo-container:hover .logoevolvere {
+    filter: brightness(1.1);
 }
 
 /* === Hero Section === */
@@ -97,6 +149,8 @@ nav.scrolled {
     align-items: center;
     justify-content: center;
     justify-content: space-around;
+    position: relative;
+    min-height: 100vh;
 }
 
 .hero::before {
@@ -107,19 +161,28 @@ nav.scrolled {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, rgba(237, 246, 249, 0.9) 0%, rgba(131, 197, 190, 0.2) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 10s ease infinite;
     z-index: -1;
 }
 
 .department {
-    width: 800px; 
+    width: 800px;
     height: 600px;
+    animation: fadeInScale 1.5s ease-out 0.3s both;
+    transition: all 0.5s ease;
+}
+
+.department:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 10px 20px rgba(0, 109, 119, 0.2));
 }
 
 .hero-content {
     max-width: 600px;
     position: relative;
     z-index: 2;
-    animation: fadeInUp 2s ease-out;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .hero h1 {
@@ -127,16 +190,67 @@ nav.scrolled {
     margin-bottom: 1.5rem;
     color: var(--teal);
     margin-top: 50px;
+    animation: slideInLeft 0.8s ease-out 0.2s both;
+    position: relative;
+}
+
+.hero h1::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--coral);
+    animation: expandWidth 3s ease-in-out infinite;
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2.5rem;
+    animation: slideInLeft 0.8s ease-out 0.4s both;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.hero p:hover {
+    opacity: 1;
+    transform: translateX(5px);
 }
 
 .hero-btns {
     display: flex;
     gap: 1rem;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.hero-btns .btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hero-btns .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+}
+
+.hero-btns .btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.hero-btns .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* DNA Animation */
@@ -146,14 +260,30 @@ nav.scrolled {
     height: 80%;
     opacity: 0.7;
     animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.dna-animation:hover {
+    animation-play-state: paused;
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0);
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
     }
+
+    25% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+
     50% {
-        transform: translateY(-20px);
+        transform: translateY(-25px) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(-15px) rotate(-2deg);
     }
 }
 
@@ -165,26 +295,101 @@ nav.scrolled {
     width: 300px;
     opacity: 0.8;
     animation: pulse 4s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.microscope-animation:hover {
+    opacity: 1;
+    animation-play-state: paused;
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
+        filter: brightness(1);
     }
+
     50% {
         transform: scale(1.05);
+        filter: brightness(1.1);
     }
 }
 
 /* === Animations === */
+@keyframes navSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes expandWidth {
+
+    0%,
+    100% {
+        width: 50px;
+    }
+
+    50% {
+        width: 100px;
     }
 }
 
@@ -201,12 +406,23 @@ nav.scrolled {
         align-items: center;
         justify-content: center;
         gap: 2rem;
-        transition: all 0.5s ease;
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links.active {
-        left: 0;  /* slides in */
+        left: 0;
+    }
+
+    .nav-links a {
+        opacity: 0;
+        animation: fadeInUp 0.5s ease-out forwards;
+        animation-delay: calc(var(--link-index, 0) * 0.1s);
+    }
+
+    .nav-links.active a {
+        animation-play-state: running;
     }
 
     .mobile-menu-btn {
@@ -231,9 +447,9 @@ nav.scrolled {
     }
 }
 
-@media (max-width:1024px){
+@media (max-width:1024px) {
     .department {
-        display: none;  /* Image hidden on tablets */
+        display: none;
     }
 }
 
@@ -241,10 +457,57 @@ nav.scrolled {
     .logoevolvere {
         height: 35px;
     }
+
     .hero h1 {
         padding-top: 20px;
     }
-    .hero{
+
+    .hero {
         margin-top: 0;
+    }
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+
+    nav,
+    nav.scrolled,
+    .logo-container,
+    .logo,
+    .logo i,
+    .nav-links a,
+    .mobile-menu-btn,
+    .logoevolvere,
+    .hero::before,
+    .department,
+    .hero-content,
+    .hero h1,
+    .hero h1::after,
+    .hero p,
+    .hero-btns,
+    .hero-btns .btn,
+    .hero-btns .btn::before,
+    .dna-animation,
+    .microscope-animation {
+        animation: none;
+        transition: none;
+    }
+
+    .logo-container:hover,
+    .department:hover,
+    .hero p:hover,
+    .hero-btns .btn:hover {
+        transform: none;
+    }
+}
+
+/* === Touch Devices === */
+@media (hover: none) and (pointer: coarse) {
+
+    .logo-container:hover,
+    .department:hover,
+    .hero p:hover,
+    .hero-btns .btn:hover {
+        transform: none;
     }
 }
